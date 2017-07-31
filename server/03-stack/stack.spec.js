@@ -1,16 +1,22 @@
-// as a team, the decision to set the limit to 5, stored in LIMIT
-const MaxStackSize = 5;
+
 
 const makeStack = () => {
   let queue = 0;
+  const MaxStackSize = 5;
+  let values = [];
 
   const isEmpty = () => queue === 0;
   const size = () => queue;
-  const push = () => {
+  const push = (v) => {
     if (queue === MaxStackSize ) throw new Error('the maximum size of the stack is ' + MaxStackSize);
     queue++;
+    values.push(v) ;
   };
-  const pop = () => queue--;
+  const pop = () => {
+    if (queue === 0 ) throw new Error('Can not pop when the stack is empty');
+    queue--;
+    return values.pop();
+  }
   return {
     isEmpty,
     size,
@@ -58,18 +64,19 @@ describe.only('the stack spec', () => {
   });
 
   it('overflows', () => {
-    for (let i = 0; i < MaxStackSize; i++) {
+    // as a team, the decision to set the limit to 5
+    for (let i = 0; i < 5; i++) {
       stack.push();
     }
 
     // (() => {
     //   stack.push();
-    // }).should.throw('the maximum size of the stack is ' + LIMIT);
+    // }).should.throw('the maximum size of the stack is ' + 5);
 
     const overFlowFunction = () => {
       stack.push();
     };
-    overFlowFunction.should.throw('the maximum size of the stack is ' + MaxStackSize);
+    overFlowFunction.should.throw('the maximum size of the stack is 5');
     //  the following doesn't work since it throws error before getting to 'should'
     // stack.push().should.throw('the maximum size of the stack is ' + MaxStackSize);
     //   the following works
@@ -77,11 +84,27 @@ describe.only('the stack spec', () => {
 
   });
 
+
   it('under-flows', () => {
+
+    const underFlowFunction = () => {
+      stack.pop();
+    };
+    underFlowFunction.should.throw('Can not pop when the stack is empty');
+  });
+
+  it('pops the same one pushed', () => {
+    stack.push('A')
+    stack.pop().should.equal('A');
 
   });
 
-  it('pops the same one pushed');
-  it('pops the same two pushed');
+  it('pops the same two pushed', () => {
+    stack.push('A');
+    stack.push('B');
+    stack.pop().should.equal('B');
+    stack.pop().should.equal('A');
+  });
+
   it('accepts only positive capacity');
 });

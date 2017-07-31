@@ -4,10 +4,12 @@ const makeStack = () => {
   const isEmpty = () => queue === 0;
   const size = () => queue;
   const push = () => queue++;
+  const pop = () => queue--;
   return {
     isEmpty: isEmpty,
     size: size,
-    push: push
+    push: push,
+    pop: pop
   };
 };
 
@@ -37,8 +39,18 @@ describe.only('the stack spec', () => {
     stack.size().should.equal(1);
   });
 
-  it('leaves stack empty when pushed and popped');
-  it('leaves stack size 0 when pushed and popped');
+  it('leaves stack empty when pushed and popped', () => {
+    stack.push();
+    stack.pop();
+    stack.isEmpty().should.be.true();
+  });
+
+  it('leaves stack size 0 when pushed and popped', () => {
+    stack.push();
+    stack.pop();
+    stack.size().should.equal(0);
+  });
+
   it('overflows');
   it('under-flows');
   it('pops the same one pushed');

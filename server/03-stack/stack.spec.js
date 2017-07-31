@@ -6,10 +6,10 @@ const makeStack = () => {
   const push = () => queue++;
   const pop = () => queue--;
   return {
-    isEmpty: isEmpty,
-    size: size,
-    push: push,
-    pop: pop
+    isEmpty,
+    size,
+    push,
+    pop
   };
 };
 

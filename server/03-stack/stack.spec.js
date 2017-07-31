@@ -2,13 +2,13 @@
 
 const makeStack = () => {
   let queue = 0;
-  const MaxStackSize = 5;
+  let maxStackSize = 5;
   let values = [];
 
   const isEmpty = () => queue === 0;
   const size = () => queue;
   const push = (v) => {
-    if (queue === MaxStackSize ) throw new Error('the maximum size of the stack is ' + MaxStackSize);
+    if (queue === maxStackSize ) throw new Error('the maximum size of the stack is ' + maxStackSize);
     queue++;
     values.push(v) ;
   };
@@ -16,12 +16,19 @@ const makeStack = () => {
     if (queue === 0 ) throw new Error('Can not pop when the stack is empty');
     queue--;
     return values.pop();
-  }
+  };
+
+  const setCapacity = (capacity) => {
+    if (capacity <= 0) return false;
+    maxStackSize = capacity;
+    return true;
+    };
   return {
     isEmpty,
     size,
     push,
-    pop
+    pop,
+    setCapacity
   };
 };
 
@@ -94,7 +101,7 @@ describe.only('the stack spec', () => {
   });
 
   it('pops the same one pushed', () => {
-    stack.push('A')
+    stack.push('A');
     stack.pop().should.equal('A');
 
   });
@@ -106,5 +113,8 @@ describe.only('the stack spec', () => {
     stack.pop().should.equal('A');
   });
 
-  it('accepts only positive capacity');
+  it('accepts only positive capacity', () => {
+    stack.setCapacity(-1).should.be.false();
+    stack.setCapacity(1).should.be.true();
+  });
 });

@@ -1,12 +1,15 @@
+// as a team, the decision to set the limit to 5, stored in LIMIT
+const MaxStackSize = 5;
+
 const makeStack = () => {
   let queue = 0;
 
   const isEmpty = () => queue === 0;
   const size = () => queue;
   const push = () => {
-    if (queue === 5) throw new Error('the maximum size of the stack is 5');
+    if (queue === MaxStackSize ) throw new Error('the maximum size of the stack is ' + MaxStackSize);
     queue++;
-  }
+  };
   const pop = () => queue--;
   return {
     isEmpty,
@@ -54,23 +57,30 @@ describe.only('the stack spec', () => {
     stack.size().should.equal(0);
   });
 
-  // as a team, the decision to set the limit to 5
   it('overflows', () => {
-    stack.push();
-    stack.push();
-    stack.push();
-    stack.push();
-    stack.push();
-    (() => {
+    for (let i = 0; i < MaxStackSize; i++) {
       stack.push();
-    }).should.throw('the maximum size of the stack is 5');
+    }
 
+    // (() => {
+    //   stack.push();
+    // }).should.throw('the maximum size of the stack is ' + LIMIT);
 
-
+    const overFlowFunction = () => {
+      stack.push();
+    };
+    overFlowFunction.should.throw('the maximum size of the stack is ' + MaxStackSize);
+    //  the following doesn't work since it throws error before getting to 'should'
+    // stack.push().should.throw('the maximum size of the stack is ' + MaxStackSize);
+    //   the following works
+    // stack.push.should.throw('the maximum size of the stack is ' + MaxStackSize);
 
   });
 
-  it('under-flows');
+  it('under-flows', () => {
+
+  });
+
   it('pops the same one pushed');
   it('pops the same two pushed');
   it('accepts only positive capacity');

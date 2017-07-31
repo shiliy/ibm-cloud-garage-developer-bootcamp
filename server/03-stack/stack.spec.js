@@ -1,23 +1,30 @@
 const makeStack = () => {
-  let size = 0;
+  let queue = 0;
+
+  const isEmpty = () => queue === 0;
+  const size = () => queue;
+  const push = () => queue++;
   return {
-    isEmpty: () => size === 0,
-    size,
-    push: () => {
-      size++;
-    }
+    isEmpty: isEmpty,
+    size: size,
+    push: push
   };
 };
 
-let stack = makeStack();
+let stack;
+
+beforeEach(() => {
+  stack = makeStack();
+});
 
 describe.only('the stack spec', () => {
+
   it('starts empty', () => {
     stack.isEmpty().should.be.true();
   });
 
   it('starts with stack size 0', () => {
-    stack.size.should.equal(0);
+    stack.size().should.equal(0);
   });
 
   it('is not be empty when pushed', () => {
@@ -25,7 +32,11 @@ describe.only('the stack spec', () => {
     stack.isEmpty().should.be.false();
   });
 
-  it('leaves stack size 1 when pushed');
+  it('leaves stack size 1 when pushed', () => {
+    stack.push();
+    stack.size().should.equal(1);
+  });
+
   it('leaves stack empty when pushed and popped');
   it('leaves stack size 0 when pushed and popped');
   it('overflows');

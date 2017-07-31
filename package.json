@@ -17,18 +17,19 @@
     "precommit": "npm-run-all clear lint spec test:ci",
     "prepush": "npm run ci",
     "server:coverage": "nyc --reporter=lcov --reporter=text --require babel-register npm run spec",
-    "spec": "mocha --compilers js:babel-register --reporter spec --growl --recursive ./test-helper.js  server/**/*.spec.js",
+    "spec": "mocha --watch --compilers js:babel-register --reporter spec --growl --recursive ./test-helper.js  server/**/*.spec.js",
     "spec:ci": "npm run server:coverage",
     "spec:clear": "clear && npm run spec",
-    "spec:watch": "clear && mocha --watch --compilers js:babel-register --reporter spec --growl --recursive ./test-helper.js  server/**/*.spec.js || true",
+    "spec:watch": "nodemon --exec npm run spec:clear || true",
     "spec:mac": "npm run spec:clear || true",
-    "tdd": "npm-run-all --parallel spec:watch",
+    "tdd": "npm-run-all --parallel spec:mac",
     "tdd:mac": "npm run spec:mac",
     "test:ci": "karma start karma.conf.js --single-run --no-auto-watch",
     "test": "karma start karma.conf.ci.js",
     "test:coverage": "karma start karma.conf.coverage.js",
     "test:sauce": "karma start karma.conf.saucelabs.js --single-run --no-auto-watch",
-    "test:watch": "karma start karma.conf.js"
+    "test:watch": "karma start karma.conf.js",
+    "test:mac": "npm run test:watch"
   },
   "homepage": "https://github.com/wpannell/ibm-cloud-garage-method-developer-bootcamp#readme",
   "repository": {

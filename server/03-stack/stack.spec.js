@@ -38,7 +38,7 @@ beforeEach(() => {
   stack = makeStack();
 });
 
-describe.only('the stack spec', () => {
+describe('the stack spec', () => {
 
   it('starts empty', () => {
     stack.isEmpty().should.be.true();

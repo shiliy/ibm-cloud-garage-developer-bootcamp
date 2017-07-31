@@ -8,6 +8,7 @@ const makeStack = () => {
   return {
     isEmpty: () => length === 0,
     push: () => length++,
+    pop: () => length--,
     size: () => length
   };
 };
@@ -38,11 +39,24 @@ describe.only('the stack spec', () => {
     stack.size().should.equal(1);
   });
 
-  it('leaves stack empty when pushed and popped');
-  it('leaves stack sie 0 when pushed and popped');
+  it('leaves stack empty when pushed and popped', () => {
+    stack.push();
+    stack.pop();
+    stack.isEmpty().should.be.true();
+  });
+
+  it('leaves stack size 0 when pushed and popped', () => {
+
+  });
+
   it('overflows');
+
   it('under-flows');
+
   it('pops the same one pushed');
+
   it('pops the same two pushed');
+
   it('accepts only positive capacity');
+
 });

@@ -1,11 +1,15 @@
+/* eslint-disable no-param-reassign */
 function primeFactorsOf(number) {
   const factors = [];
-  if (number > 1) {
-    if (number % 2 === 0)  {
-      factors.push(2);
-      number /= 2;
-    }
-    if (number > 1) factors.push(number);
+  // if (number > 1) {
+    // while (number % 2 === 0) {
+    //   factors.push(2);
+    //   number /= 2;
+
+  let divisor = 2;
+  while (number > 1) {
+    for (number > 1; number % divisor === 0; number /= divisor) factors.push(divisor);
+    divisor++;
   }
   return factors;
 }
@@ -24,7 +28,7 @@ describe.only('the prime numbers canary spec', () => {
 
   });
 
-  it('returns [2,2] for 4',() => {
+  it('returns [2,2] for 4', () => {
     primeFactorsOf(4).should.deepEqual([2, 2]);
   });
 
@@ -41,6 +45,25 @@ describe.only('the prime numbers canary spec', () => {
     primeFactorsOf(7).should.deepEqual([7]);
   });
 
-  it('returns [2,2,2] for 8');
-  it('returns [3,3] for 9');
+  it('returns [2,2,2] for 8', () => {
+    primeFactorsOf(8).should.deepEqual([2, 2, 2]);
+  });
+
+  it('returns [3,3] for 9', () => {
+    primeFactorsOf(9).should.deepEqual([3, 3]);
+  });
+
+  it('returns [2, 2, 5, 5] for 100', () => {
+    primeFactorsOf(100).should.deepEqual([2, 2, 5, 5]);
+  });
+
+  it('returns [10,10] for 2017', () => {
+    primeFactorsOf(2017).should.deepEqual([2017]);
+  });
+
+
+  it('returns [ 2, 2, 2, 2, 2, 3, 3, 7 ] for 2016', () => {
+    primeFactorsOf(2016).should.deepEqual([ 2, 2, 2, 2, 2, 3, 3, 7]);
+  });
+
 });

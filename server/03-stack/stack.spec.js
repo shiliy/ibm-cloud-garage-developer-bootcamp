@@ -2,13 +2,13 @@
 
 const makeStack = () => {
   let queue = 0;
-  let maxStackSize = 5;
+  let capacity = 5;
   let values = [];
 
   const isEmpty = () => queue === 0;
   const size = () => queue;
   const push = (v) => {
-    if (queue === maxStackSize ) throw new Error('the maximum size of the stack is ' + maxStackSize);
+    if (queue === capacity ) throw new Error('the maximum size of the stack is ' + capacity);
     queue++;
     values.push(v) ;
   };
@@ -18,9 +18,9 @@ const makeStack = () => {
     return values.pop();
   };
 
-  const setCapacity = (capacity) => {
-    if (capacity <= 0) return false;
-    maxStackSize = capacity;
+  const setCapacity = (c) => {
+    if (c <= 0) return false;
+    capacity = c;
     return true;
     };
   return {
@@ -115,9 +115,9 @@ describe.only('the stack spec', () => {
 
   it('accepts only positive capacity', () => {
     stack.setCapacity(-1).should.be.false();
+    stack.setCapacity(0).should.be.false();
     stack.setCapacity(1).should.be.true();
   });
-
 
   it('enforce capacity value in overflow',() => {
     const newCapacity = 11;

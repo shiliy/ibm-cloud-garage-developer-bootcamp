@@ -117,4 +117,21 @@ describe.only('the stack spec', () => {
     stack.setCapacity(-1).should.be.false();
     stack.setCapacity(1).should.be.true();
   });
+
+
+  it('enforce capacity value in overflow',() => {
+    const newCapacity = 11;
+    stack.setCapacity(newCapacity).should.be.true();
+    for (let i = 0; i < newCapacity; i++) {
+      stack.push();
+    }
+    const overFlowFunction = () => {
+      stack.push();
+    };
+    // overFlowFunction.should.throw('the maximum size of the stack is ' + 10);
+    overFlowFunction.should.throw('the maximum size of the stack is ' + newCapacity);
+
+  });
+
 });
+

@@ -1,18 +1,15 @@
 const makeStack = (cap = 3) => {
-  let queue = 0;
-  let capacity = cap;
   if (cap <= 0 ) throw new Error('the capacity should be positive');
+  let capacity = cap;
   let internalStack = [];
-  const isEmpty = () => queue === 0;
-  const size = () => queue;
+  const size = () => internalStack.length;
+  const isEmpty = () => size() === 0;
   const push = (v) => {
-    if (queue === capacity) throw new Error('the maximum size of the stack is ' + capacity);
-    queue++;
+    if (size() === capacity) throw new Error('the maximum size of the stack is ' + capacity);
     internalStack.push(v);
   };
   const pop = () => {
-    if (queue === 0) throw new Error('can not pop on an empty stack');
-    queue--;
+    if (size() === 0) throw new Error('can not pop on an empty stack');
     return internalStack.pop();
   };
   return {
@@ -97,16 +94,21 @@ describe.only('the stack', () => {
 
   it('accepts only positive capacity', () => {
 
-    const wrongCapacityFunction0 = () => {
-      stack = makeStack(0);
-    };
-    wrongCapacityFunction0.should.throw('the capacity should be positive');
+    // const wrongCapacityFunction0 = () => {
+    //   stack = makeStack(0);
+    // };
+    // wrongCapacityFunction0.should.throw('the capacity should be positive');
+    //
+    // const wrongCapacityFunctionNeg = () => {
+    //   stack = makeStack(-1);
+    // };
 
-    const wrongCapacityFunctionNeg = () => {
-      stack = makeStack(-1);
+    const wrongCapacityFunction = (cap) => {
+      return () => { stack = makeStack(cap); };
     };
-    wrongCapacityFunctionNeg.should.throw('the capacity should be positive');
-    stack = makeStack(1);
+
+    wrongCapacityFunction(0).should.throw('the capacity should be positive');
+    // stack = makeStack(1);
   });
 
 });

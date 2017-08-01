@@ -14,7 +14,7 @@ function primeFactorsOf(number) {
   return factors;
 }
 
-describe.only('the prime numbers canary spec', () => {
+describe('the prime numbers canary spec', () => {
   it('returns none for 1', () => {
     primeFactorsOf(1).should.deepEqual([]);
   });

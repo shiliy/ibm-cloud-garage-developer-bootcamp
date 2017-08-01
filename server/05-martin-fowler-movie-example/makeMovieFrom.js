@@ -9,9 +9,7 @@ moviePriceCode[REGULAR] = (daysRented) => {
 };
 
 moviePriceCode[NEW_RELEASE] = (daysRented) => {
-        let total = 0;
-        total += daysRented * 3;
-        return total;
+  return daysRented * 3;
 };
 
 moviePriceCode[CHILDRENS] = (daysRented) => {
@@ -38,8 +36,7 @@ let makeMovieFrom = (title, somePriceCode) => {
       let total = 0;
 
       const oneMoviePrice = moviePriceCode[priceCode];
-      if (oneMoviePrice)
-        total += oneMoviePrice(daysRented);
+      if (oneMoviePrice) total += oneMoviePrice(daysRented);
       return total;
     }
   };

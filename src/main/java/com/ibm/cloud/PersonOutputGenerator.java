@@ -7,20 +7,9 @@ import java.util.List;
 
 public class PersonOutputGenerator {
   public static void generateOutput1(List<Person> personList) {
-    Collections.sort(personList, new Comparator<Person>() {
-      // sort by Gender, then by LastName in ascending order
-      public int compare(Person p1, Person p2) {
-        if(!p1.getGender().equals(p2.getGender())) {
-          return p1.getGender().compareTo(p2.getGender());
-        }
-
-        return p1.getLastName().compareTo(p2.getLastName());
-      }
-    });
 
     System.out.println("Output 1:\n");
-
-    printPersons(personList);
+    generateOutput(personList, Person.GENDER, Person.LAST_NAME);
   }
 
   private static void printPersons(List<Person> personList) {
@@ -30,6 +19,8 @@ public class PersonOutputGenerator {
   }
 
   public static void generateOutput2(List<Person> personList) {
+    // sort by DateOfBirth in ascending order, then by LastName in ascending order
+    System.out.println("\nOutput 2:\n");
     generateOutput(personList, Person.DATE_OF_BIRTH, Person.LAST_NAME);
   }
 
@@ -42,12 +33,7 @@ public class PersonOutputGenerator {
 
   private static void generateOutput(List<Person> personList, String firstElement, String secondElement) {
     Collections.sort(personList, new Comparator<Person>() {
-      // sort by DateOfBirth in ascending order, then by LastName in ascending order
       public int compare(Person p1, Person p2) {
-        //				 if (p1.getDateOfBirth().compareTo(p2.getDateOfBirth()) != 0) {
-        //         return p1.getDateOfBirth().compareTo(p2.getDateOfBirth());
-        //				 }
-        //        return p1.getLastName().compareTo(p2.getLastName());
         if(compareElement(p1, p2, firstElement) != 0) {
           return compareElement(p1, p2, firstElement);
         }
@@ -55,9 +41,6 @@ public class PersonOutputGenerator {
 
       }
     });
-
-    System.out.println("\nOutput 2:\n");
-
     printPersons(personList);
   }
 

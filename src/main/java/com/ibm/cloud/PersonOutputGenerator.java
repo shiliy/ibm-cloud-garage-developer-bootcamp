@@ -9,10 +9,6 @@ class PersonOutputGenerator {
   static void generateOutput1(List<Person> personList, String title) {
 
     generateOutput(personList, Person.GENDER, Person.LAST_NAME);
-    printPersons(personList, title);
-  }
-
-  private static void printPersons(List<Person> personList, String title) {
     System.out.println(title);
     for(Person person : personList) {
       System.out.println(person);
@@ -22,7 +18,10 @@ class PersonOutputGenerator {
   static void generateOutput2(List<Person> personList, String title) {
     // sort by DateOfBirth in ascending order, then by LastName in ascending order
     generateOutput(personList, Person.DATE_OF_BIRTH, Person.LAST_NAME);
-    printPersons(personList, title);
+    System.out.println(title);
+    for(Person person : personList) {
+      System.out.println(person);
+    }
   }
 
   private static int compareElement(Person p1, Person p2, String elementName) {
@@ -53,6 +52,9 @@ class PersonOutputGenerator {
       }
     });
 
-    printPersons(personList, title);
+    System.out.println(title);
+    for(Person person : personList) {
+      System.out.println(person);
+    }
   }
 }

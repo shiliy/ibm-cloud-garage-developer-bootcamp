@@ -19,6 +19,18 @@ public class Person {
   private Date dateOfBirth;
   private String color;
 
+  public Person(String lastName, String firstName, String gender, String color, String dateOfBirth) throws PersonParseException {
+    this.firstName = firstName;
+    this.lastName = lastName;
+
+    if(gender.startsWith("M"))
+      this.gender = Gender.MALE;
+    else
+      this.gender = Gender.FEMALE;
+    this.color = color;
+    this.dateOfBirth = toDate(dateOfBirth);
+  }
+
   /**
    Constructs a Person object by parsing a string that contains attributes for
    the Person.
@@ -65,24 +77,7 @@ public class Person {
             break;
 
           case DATE_OF_BIRTH:
-            SimpleDateFormat format = null;
-
-            if(token.contains("/")) {
-              format = new SimpleDateFormat("MM/dd/yyyy");
-            }
-            else if(token.contains("-")) {
-              format = new SimpleDateFormat("MM-dd-yyyy");
-            }
-            else {
-              throw new PersonParseException("Invalid date encountered");
-            }
-
-            try {
-              dateOfBirth = format.parse(token);
-            }
-            catch(ParseException e) {
-              throw new PersonParseException("Invalid date encountered");
-            }
+            dateOfBirth = toDate(token);
             break;
 
           case COLOR:
@@ -94,6 +89,29 @@ public class Person {
         }
       }
     }
+  }
+
+  private Date toDate(String token) throws PersonParseException {
+    Date dateOfBirth;
+    SimpleDateFormat format = null;
+
+    if(token.contains("/")) {
+      format = new SimpleDateFormat("MM/dd/yyyy");
+    }
+    else if(token.contains("-")) {
+      format = new SimpleDateFormat("MM-dd-yyyy");
+    }
+    else {
+      throw new PersonParseException("Invalid date encountered");
+    }
+
+    try {
+      dateOfBirth = format.parse(token);
+    }
+    catch(ParseException e) {
+      throw new PersonParseException("Invalid date encountered");
+    }
+    return dateOfBirth;
   }
 
   public String getFirstName() {

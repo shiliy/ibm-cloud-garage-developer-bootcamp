@@ -12,25 +12,25 @@ public class Person {
 	public final static String DATE_OF_BIRTH = "dateOfBirth";
 	public final static String COLOR = "color";
 	public final static String IGNORE = "ignore";
-	
+
 	private String firstName;
 	private String lastName;
 	private Gender gender;
 	private Date dateOfBirth;
 	private String color;
-	
+
 	/**
 	 * Constructs a Person object by parsing a string that contains attributes for the Person.
-	 * 
+	 *
 	 * @param line 			input text string
 	 * @param lineElements	ordering of the elements within the text string
-	 * @param delimiter		defines the delimiter pattern that separates individual tokens 
+	 * @param delimiter		defines the delimiter pattern that separates individual tokens
 	 * 						in the input text string - refer {@link java.util.Scanner} for
-	 * 						definition of the delimiter pattern 
+	 * 						definition of the delimiter pattern
 	 * @throws PersonParseException if a parsing is encountered in the input text string
 	 */
 	public Person(String line, String[] lineElements, String delimiter) throws PersonParseException {
-		
+
 		try (Scanner scanner = new Scanner(line)) {
 			scanner.useDelimiter(delimiter);
 			int i = 0;
@@ -106,7 +106,7 @@ public class Person {
 	public String getColor() {
 		return color;
 	}
-	
+
 	@Override
 	public String toString() {
 		SimpleDateFormat format = new SimpleDateFormat("M/d/yyyy");
@@ -121,7 +121,27 @@ public class Person {
 		sb.append(format.format(dateOfBirth));
 		sb.append(" ");
 		sb.append(color);
-		
+
 		return sb.toString();
 	}
+
+	public Object getElement(String elementName) {
+
+    switch (elementName) {
+
+      case FIRST_NAME:
+        return getFirstName();
+      case LAST_NAME:
+        return getLastName();
+      case GENDER:
+        return getGender().toString();
+      case COLOR:
+        return getColor();
+      case DATE_OF_BIRTH:
+        return getDateOfBirth();
+      default:
+        return null; //todo: fix this
+    }
+
+  }
 }

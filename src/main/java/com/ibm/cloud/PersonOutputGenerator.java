@@ -5,23 +5,24 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
-public class PersonOutputGenerator {
-  public static void generateOutput1(List<Person> personList) {
+class PersonOutputGenerator {
+  static void generateOutput1(List<Person> personList, String title) {
 
-    System.out.println("Output 1:\n");
     generateOutput(personList, Person.GENDER, Person.LAST_NAME);
+    printPersons(personList, title);
   }
 
-  private static void printPersons(List<Person> personList) {
+  private static void printPersons(List<Person> personList, String title) {
+    System.out.println(title);
     for(Person person : personList) {
       System.out.println(person);
     }
   }
 
-  public static void generateOutput2(List<Person> personList) {
+  static void generateOutput2(List<Person> personList, String title) {
     // sort by DateOfBirth in ascending order, then by LastName in ascending order
-    System.out.println("\nOutput 2:\n");
     generateOutput(personList, Person.DATE_OF_BIRTH, Person.LAST_NAME);
+    printPersons(personList, title);
   }
 
   private static int compareElement(Person p1, Person p2, String elementName) {
@@ -41,10 +42,10 @@ public class PersonOutputGenerator {
 
       }
     });
-    printPersons(personList);
+
   }
 
-  public static void generateOutput3(List<Person> personList) {
+  static void generateOutput3(List<Person> personList, String title) {
     Collections.sort(personList, new Comparator<Person>() {
       // sort by LastName in descending order
       public int compare(Person p1, Person p2) {
@@ -52,8 +53,6 @@ public class PersonOutputGenerator {
       }
     });
 
-    System.out.println("\nOutput 3:\n");
-
-    printPersons(personList);
+    printPersons(personList, title);
   }
 }

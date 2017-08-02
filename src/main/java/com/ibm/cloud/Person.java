@@ -6,12 +6,12 @@ import java.util.Date;
 import java.util.Scanner;
 
 public class Person {
-  public final static String FIRST_NAME = "firstName";
-  public final static String LAST_NAME = "lastName";
-  public final static String GENDER = "gender";
-  public final static String DATE_OF_BIRTH = "dateOfBirth";
-  public final static String COLOR = "color";
-  public final static String IGNORE = "ignore";
+  final static String FIRST_NAME = "firstName";
+  final static String LAST_NAME = "lastName";
+  final static String GENDER = "gender";
+  final static String DATE_OF_BIRTH = "dateOfBirth";
+  final static String COLOR = "color";
+  final static String IGNORE = "ignore";
 
   private String firstName;
   private String lastName;
@@ -23,10 +23,8 @@ public class Person {
     this.firstName = firstName;
     this.lastName = lastName;
 
-    if(gender.startsWith("M"))
-      this.gender = Gender.MALE;
-    else
-      this.gender = Gender.FEMALE;
+    if(gender.startsWith("M")) { this.gender = Gender.MALE; }
+    else { this.gender = Gender.FEMALE; }
     this.color = color;
     this.dateOfBirth = toDate(dateOfBirth);
   }
@@ -93,7 +91,7 @@ public class Person {
 
   private Date toDate(String token) throws PersonParseException {
     Date dateOfBirth;
-    SimpleDateFormat format = null;
+    SimpleDateFormat format;
 
     if(token.contains("/")) {
       format = new SimpleDateFormat("MM/dd/yyyy");
@@ -126,7 +124,7 @@ public class Person {
     return gender;
   }
 
-  public Date getDateOfBirth() {
+  Date getDateOfBirth() {
     return dateOfBirth;
   }
 
@@ -137,19 +135,7 @@ public class Person {
   @Override
   public String toString() {
     SimpleDateFormat format = new SimpleDateFormat("M/d/yyyy");
-
-    StringBuilder sb = new StringBuilder();
-    sb.append(lastName);
-    sb.append(" ");
-    sb.append(firstName);
-    sb.append(" ");
-    sb.append(gender);
-    sb.append(" ");
-    sb.append(format.format(dateOfBirth));
-    sb.append(" ");
-    sb.append(color);
-
-    return sb.toString();
+    return lastName + " " + firstName + " " + gender + " " + format.format(dateOfBirth) + " " + color;
   }
 
   public Object getElement(String elementName) {

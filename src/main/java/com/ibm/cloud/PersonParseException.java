@@ -1,10 +1,10 @@
 package com.ibm.cloud;
 
-public class PersonParseException extends Exception {
+class PersonParseException extends Exception {
 
   private static final long serialVersionUID = 1L;
 
-  public PersonParseException(String message) {
+  PersonParseException(String message) {
     super(message);
   }
 }

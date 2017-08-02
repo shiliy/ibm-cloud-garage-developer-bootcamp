@@ -1,7 +1,5 @@
 package com.ibm.cloud;
 
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -32,25 +30,19 @@ class PersonOutputGenerator {
   }
 
   private static void generateOutput(List<Person> personList, String firstElement, String secondElement) {
-    Collections.sort(personList, new Comparator<Person>() {
-      public int compare(Person p1, Person p2) {
-        if(compareElement(p1, p2, firstElement) != 0) {
-          return compareElement(p1, p2, firstElement);
-        }
-        return compareElement(p1, p2, secondElement);
-
+    personList.sort((Person p1, Person p2) -> {
+      if(compareElement(p1, p2, firstElement) != 0) {
+        return compareElement(p1, p2, firstElement);
       }
+      return compareElement(p1, p2, secondElement);
+
     });
 
   }
 
   static void generateOutput3(List<Person> personList, String title) {
-    Collections.sort(personList, new Comparator<Person>() {
-      // sort by LastName in descending order
-      public int compare(Person p1, Person p2) {
-        return p2.getLastName().compareTo(p1.getLastName());
-      }
-    });
+    // sort by LastName in descending order
+    personList.sort((p1, p2) -> p2.getLastName().compareTo(p1.getLastName()));
 
     System.out.println(title);
     for(Person person : personList) {

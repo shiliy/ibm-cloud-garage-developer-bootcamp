@@ -72,7 +72,30 @@ public class PersonLoader {
     Person.COLOR, Person.DATE_OF_BIRTH};
     String delimiter = "\\s*,\\s*";
 
-    return loadPersonRecords(inputFilePath, elements, delimiter);
+    List<Person> personList = new ArrayList<Person>();
+
+    try(Scanner scanner = new Scanner(new File(inputFilePath))) {
+      while(scanner.hasNextLine()) {
+        String line = scanner.nextLine();
+        String[] tokens = line.split(",");
+        for (int i = 0; i < tokens.length; i++) {
+          tokens[i] = tokens[i].trim();
+        };
+
+        try {
+          // Person person = new Person(line, elements, delimiter);
+          // personList.add(person);
+          personList.add(new Person(tokens[0], tokens[1], tokens[2], tokens[3],  tokens[4]));
+
+        }
+        catch(PersonParseException e) {
+          e.printStackTrace();
+        }
+      }
+    }
+
+    return personList;
+    // return loadPersonRecords(inputFilePath, elements, delimiter);
   }
 
 

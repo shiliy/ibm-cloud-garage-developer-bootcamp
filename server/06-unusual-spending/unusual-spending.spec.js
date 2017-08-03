@@ -1,5 +1,4 @@
 import {replace, when, verify} from '../../test-helper';
-import {currentMonth, priorMonth} from './month';
 
 describe('unusual spending', () => {
 

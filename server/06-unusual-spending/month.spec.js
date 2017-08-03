@@ -1,11 +1,16 @@
+import {currentMonth, priorMonth} from "./months";
 
-describe.only('month', () => {
+describe('months', () => {
 
   it('canary test', () => {
     true.should.be.true();
   });
 
-  // it('month.current() should return {year:2016, month:12}');
-  // it('month.prior() should return {year:2016, month:11}');
+  it('months.current() should return 8', () => {
+    currentMonth().should.equal(8);
+  });
+  it('months.prior() should return 7', () => {
+    priorMonth().should.equal(7);
+  });
 
 });
